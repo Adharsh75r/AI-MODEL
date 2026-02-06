@@ -1,9 +1,11 @@
-TOKEN = "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"
 from groq import Groq
 from typing import List, Dict
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
-
+TOKEN = os.getenv('LLAMA_API_KEY')
 MODEL_NAME = "llama-3.1-8b-instant"
 TEMPERATURE = 0.2 
 
@@ -17,10 +19,10 @@ You must:
 """
 
 
-# ---- LLM Initialization ----
+
 client = Groq(api_key=TOKEN)
 
-# ---- Public Interface ----
+
 def generate_answer(context: str, question: str) -> str:
     """
     Generate a grounded answer using strict system rules.
