@@ -7,13 +7,17 @@ import os
 from app.services.ingestion_service import ingest_document
 from app.services.rag_service import ask_question
 from app.schemas.query import AskResponse
+from app.schemas.query import AskRequest
 from app.policy.policy_engine import evaluate_policy
 
 app = FastAPI(title="Responsible GenAI RAG Backend")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+
+        "http://localhost:8080",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -37,8 +41,9 @@ async def upload(file: UploadFile = File(...)):
     }
 
 @app.post("/ask",response_model=AskResponse)
-async def ask(query: str):
-    rag_result = ask_question(query)
+async def ask(payload: AskRequest):
+    print("Payload received:", payload.dict())
+    rag_result = ask_question(payload.query)
     policy_decision = evaluate_policy(rag_result)
     
     return {
