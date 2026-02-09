@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================
+   Ultra-Dim Dark SaaS Theme — No Backlight
+   ===================================================== */
+
+@layer base {
+  :root {
+    /* Core background + text */
+    --background: 240 15% 7%;
+    --foreground: 210 30% 92%;
+
+    /* Card surfaces */
+    --card: 240 14% 10%;
+    --card-foreground: 210 30% 92%;
+
+    --popover: 240 14% 10%;
+    --popover-foreground: 210 30% 92%;
+
+    /* Primary (muted violet) */
+    --primary: 265 40% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary */
+    --secondary: 240 18% 16%;
+    --secondary-foreground: 210 30% 92%;
+
+    /* Muted */
+    --muted: 240 12% 18%;
+    --muted-foreground: 215 15% 60%;
+
+    /* Accent (very soft) */
+    --accent: 190 35% 45%;
+    --accent-foreground: 240 15% 7%;
+
+    /* Status */
+    --success: 160 45% 40%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 65% 50%;
+    --warning-foreground: 240 15% 7%;
+
+    --danger: 350 55% 55%;
+    --danger-foreground: 0 0% 100%;
+
+    --destructive: 350 55% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* UI */
+    --border: 240 10% 20%;
+    --input: 240 10% 20%;
+    --ring: 265 40% 55%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar — True Night Black */
+    --sidebar-background: 240 10% 2%;
+    --sidebar-foreground: 210 30% 88%;
+    --sidebar-primary: 265 40% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 10% 6%;
+    --sidebar-accent-foreground: 210 30% 92%;
+    --sidebar-border: 240 10% 8%;
+    --sidebar-ring: 265 40% 55%;
+
+    /* Glass — effectively flat */
+    --glass-background: 240 14% 10% / 0.92;
+    --glass-border: 240 10% 20% / 0.4;
+    --glass-glow: 0 0% 0% / 0;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: linear-gradient(
+      180deg,
+      hsl(240 15% 6%),
+      hsl(240 15% 8%)
+    );
+    min-height: 100vh;
+  }
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* =====================================================
+   Components — Flat & Calm
+   ===================================================== */
+
+@layer components {
+  /* Card (no glow, no shine) */
+  .glass-card {
+    @apply relative overflow-hidden rounded-2xl;
+    background: hsl(var(--glass-background));
+    border: 1px solid hsl(var(--glass-border));
+    box-shadow: 0 4px 14px hsl(240 20% 2% / 0.4);
+  }
+
+  .glass-card::before {
+    content: none;
+  }
+
+  .glass-card-hover {
+    @apply transition-all duration-200;
+  }
+
+  .glass-card-hover:hover {
+    border-color: hsl(240 10% 30%);
+    box-shadow: 0 6px 18px hsl(240 20% 2% / 0.55);
+  }
+
+  /* Buttons — solid, no glow */
+  .gradient-animated {
+    background: hsl(var(--primary));
+    color: white;
+  }
+
+  /* =====================================================
+     Sidebar — Ultra Dim / No Backlight
+     ===================================================== */
+
+  .sidebar {
+    background: hsl(var(--sidebar-background));
+    border-right: 1px solid hsl(var(--sidebar-border));
+  }
+
+  .sidebar-item {
+    @apply transition-colors duration-150 rounded-md;
+    color: hsl(var(--sidebar-foreground));
+  }
+
+  .sidebar-item:hover {
+    background: hsl(var(--sidebar-accent));
+  }
+
+  .sidebar-item-active {
+    background: hsl(240 10% 8%);
+    border-left: 2px solid hsl(var(--primary));
+  }
+
+  /* Input focus — minimal */
+  .input-glow {
+    @apply transition-colors duration-150;
+  }
+
+  .input-glow:focus {
+    border-color: hsl(var(--primary));
+    box-shadow: none;
+  }
+
+  /* Fade in — subtle */
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
